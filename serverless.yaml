@@ -1,0 +1,22 @@
+service: nest-serverless
+
+plugins:
+  - serverless-offline
+  - serverless-deployment-bucket
+provider:
+  name: aws
+  runtime: nodejs14.x
+  stage: prod
+  profile: default
+
+
+functions:
+  main:
+    handler: dist/main.handler
+    events:
+      - http:
+          method: ANY
+          path: /
+      - http:
+          method: ANY
+          path: '{proxy+}'
